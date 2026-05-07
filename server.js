@@ -6,7 +6,7 @@ const PORT = 8000
 app.use(express.json())
 
 app.post("/test", (req, res)=>{
-  res.json({message: 'recieved post'})
+  res.json({recived: req.body})
 })
 
 app.get("/test", (req, res) => {
