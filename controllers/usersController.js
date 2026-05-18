@@ -1,4 +1,4 @@
-import { getUsers } from "../queries/usersQueries";
+import { getUsers } from "../queries/usersQueries.js";
 
 export async function getAllUsers(req, res){
 try{
