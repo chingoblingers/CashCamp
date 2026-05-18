@@ -17,11 +17,11 @@ try{
     await pool.query(sql)
     console.log(`${file} executed successfully`)
   }
+  console.log("Schema executed successfully")
 }catch(error){
 console.error(`unable to read file due to error: ${error}`)
 }finally{
  await pool.end()
- console.log("Schema executed successfully")
 }    
 }
 
