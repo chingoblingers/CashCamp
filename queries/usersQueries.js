@@ -25,3 +25,8 @@ export async function updateSingleUser(name, email, id){
   const {rows} = await pool.query("UPDATE users SET name = $1, email = $2 WHERE id = $3 RETURNING *", [name,email,id])
   return rows[0]
 }
+
+export async function deleteSingleUser(id){
+  const {rows} = await pool.query("DELETE FROM users WHERE id = $1 RETURNING *", [id])
+  return rows[0]
+}
