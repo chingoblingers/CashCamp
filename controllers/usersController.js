@@ -1,4 +1,4 @@
-import { getUsers, createUser, getSingleUser, updateSingleUser } from "../queries/usersQueries.js";
+import { getUsers, createUser, getSingleUser, updateSingleUser, deleteSingleUser } from "../queries/usersQueries.js";
 
 export async function getAllUsers(req, res){
 try{
@@ -51,4 +51,19 @@ export async function updateUser(req, res){
     console.error(error)
     res.json({error: error.message})
     }
+}
+
+export async function deleteUser(req, res){
+try{
+const {id} = req.params
+const deletedUser = await deleteSingleUser(id)
+if (!deletedUser){
+    return res.status(404).json({error: "unable to delete user"})
+}
+res.status(200).json({message: "User deleted successfully", user: deletedUser})
+}catch(error){
+console.error(error)
+res.json(500).json({error: error.message})    
+}
+
 }
