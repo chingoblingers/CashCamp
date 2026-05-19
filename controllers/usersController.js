@@ -1,4 +1,4 @@
-import { getUsers, createUser, getSingleUser } from "../queries/usersQueries.js";
+import { getUsers, createUser, getSingleUser, updateSingleUser } from "../queries/usersQueries.js";
 
 export async function getAllUsers(req, res){
 try{
@@ -36,4 +36,19 @@ res.status(200).json({user})
   res.status(500).json({error: error.message})  
   } 
   
+}
+
+export async function updateUser(req, res){
+    try{
+    const {name, email} = req.body
+    const {id} = req.params
+    const updatedUser = await updateSingleUser(name,email,id)
+    if (!updatedUser){
+        return res.status(404).json({error: "No user found to update"})
+    }
+     res.status(200).json({user: updatedUser})
+    }catch(error){
+    console.error(error)
+    res.json({error: error.message})
+    }
 }
