@@ -1,4 +1,4 @@
-import { getUserAccounts,createSingleAccount } from "../queries/accountsQueries.js";
+import { getUserAccounts,createSingleAccount,updateUserAccount } from "../queries/accountsQueries.js";
 
 export async function getAccounts(req, res){
  try{
@@ -26,4 +26,19 @@ export async function createAccount(req, res) {
     res.status(500).json({error: error.message})
     }
     
+}
+
+export async function updateAccount(req, res){
+    try {
+    const {userId, accountId} = req.params
+    const {account_name, account_type, starting_balance} = req.body
+    const updatedAccount = await updateUserAccount(account_name,account_type,starting_balance,userId,accountId)
+    if(!updatedAccount){
+    return  res.status(404).json({message: "No such account to update"})
+    }
+    res.status(200).json({message:`Updated account ${account_name} successfully`, user: updatedAccount})
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({error: error.message})  
+    }
 }
