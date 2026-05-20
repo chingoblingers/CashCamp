@@ -9,7 +9,7 @@ const PORT = 8000
 app.use(express.json())
 app.use("/test", TestRouter)
 app.use("/users", UsersRouter)
-app.use("/users/:id/accounts", AccountsRouter)
+app.use("/users/:userId/accounts", AccountsRouter)
 
 app.listen(PORT, () => {
   console.log(`running on PORT:${PORT} successfully`)
