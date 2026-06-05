@@ -21,3 +21,8 @@ export async function updateUserAccount(name, type, balance, userId, accountId) 
 
   return rows[0]
 }
+
+export async function deleteAcc(userId, accountId){
+ const { rows } = await pool.query("DELETE FROM accounts WHERE user_id = $1 AND id = $2 RETURNING *", [userId, accountId])
+ return rows[0]
+}
