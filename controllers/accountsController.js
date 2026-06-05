@@ -1,4 +1,4 @@
-import { getUserAccounts,createSingleAccount,updateUserAccount } from "../queries/accountsQueries.js";
+import { getUserAccounts,createSingleAccount,updateUserAccount,deleteAcc } from "../queries/accountsQueries.js";
 
 export async function getAccounts(req, res){
  try{
@@ -41,4 +41,22 @@ export async function updateAccount(req, res){
       console.error(error)
       res.status(500).json({error: error.message})  
     }
+}
+
+export async function deleteAccount(req, res){
+    try{
+        const {user_id, id} = req.body
+      const deletedAccount = await deleteAcc(user_id,id)
+        if(!deletedAccount){
+         return  res.status(404).json({message: "No account of that name exists to be deleted"})
+        }
+        res.status(200).json({message: "account has been deleted."})
+        
+    }catch(error){
+    res.status(500).json({error: error.message})
+    console.error(error)
+    }
+    
+
+
 }
