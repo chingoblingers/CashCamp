@@ -14,3 +14,8 @@ export async function update(name, kind, group, userId, catId){
     const {rows} = await pool.query("Update categories SET name = $1, kind = $2, category_group = $3 WHERE user_id = $4 AND id = $5 RETURNING *",[name, kind, group,userId,catId])
     return rows[0]
 }
+
+export async function deleteSingleCat(userId, catId){
+    const {rows} = pool.query("DELETE FROM categories WHERE id = $1 AND user_id = $2 RETURNING *", [catId, userId])
+    return rows[0]
+}
