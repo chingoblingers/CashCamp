@@ -5,7 +5,7 @@ const categoriesRouter = express.Router({ mergeParams: true })
 
 categoriesRouter.post("/" , createCategory)
 categoriesRouter.get("/", getUserCatergories)
-categoriesRouter.put("/", updateCategory)
-categoriesRouter.delete("/", deleteCategory)
+categoriesRouter.put("/:categoryId", updateCategory)
+categoriesRouter.delete("/:categoryId", deleteCategory)
 
 export default categoriesRouter

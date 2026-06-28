@@ -33,9 +33,9 @@ export async function getUserCatergories(req, res) {
 
 export async function updateCategory(req, res){
     try{
-    const {userId} = req.params
-    const {name, kind, group, accountId} = req.body
-    const updatedCat = await update(name,kind,group,userId,accountId)
+    const {userId, categoryId} = req.params
+    const {name, kind, group} = req.body
+    const updatedCat = await update(name,kind,group,userId,categoryId)
     if(!updatedCat){
     return res.status(404).json({message: "unable to update"})    
     }
@@ -48,8 +48,7 @@ export async function updateCategory(req, res){
 
 export async function deleteCategory(req, res){
     try{
-    const {userId} = req.params
-    const {categoryId} = req.body
+    const {userId, categoryId} = req.params
     const deletedCat = await deleteSingleCat(userId,categoryId)
     if (!deletedCat){
     return res.status(404).json({message: "unable to delete"})
@@ -57,7 +56,7 @@ export async function deleteCategory(req, res){
     res.status(200).json({deleted: deletedCat})
 
     }catch(error){
-    res.satus(500).json({error: error.message})
+    res.status(500).json({error: error.message})
     console.error(error)    
     }
 }
