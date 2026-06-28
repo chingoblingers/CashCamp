@@ -9,3 +9,8 @@ export async function getCategories(id){
     const {rows} = await pool.query("SELECT * FROM categories WHERE user_id = $1", [id])
     return rows
 }
+
+export async function update(name, kind, group, userId, catId){
+    const {rows} = await pool.query("Update categories SET name = $1, kind = $2, category_group = $3 WHERE user_id = $4 AND id = $5 RETURNING *",[name, kind, group,userId,catId])
+    return rows[0]
+}
