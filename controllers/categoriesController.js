@@ -2,8 +2,9 @@ import { createSingleCategory, getCategories } from "../queries/categoriesQuerie
 
 export async function createCategory(req,res){
     try{
-     const {id, name, kind, group} = req.body
-     const category = await createSingleCategory(id, name, kind, group)
+     const {userId} = req.params   
+     const {name, kind, group} = req.body
+     const category = await createSingleCategory(userId, name, kind, group)
      if (!category){
         return res.status(404).json({message: "unable to create category"})
      }
