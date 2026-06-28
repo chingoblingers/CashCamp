@@ -1,4 +1,4 @@
-import { createSingleCategory, getCategories, update } from "../queries/categoriesQueries.js";
+import { createSingleCategory, getCategories, update, deleteSingleCat } from "../queries/categoriesQueries.js";
 
 export async function createCategory(req,res){
     try{
@@ -43,5 +43,21 @@ export async function updateCategory(req, res){
     }catch(error){
     res.status(500).json({error: error.message})
     console.error(error)
+    }
+}
+
+export async function deleteCategory(req, res){
+    try{
+    const {userId} = req.params
+    const {categoryId} = req.body
+    const deletedCat = await deleteSingleCat(userId,categoryId)
+    if (!deletedCat){
+    return res.status(404).json({message: "unable to delete"})
+    }
+    res.status(200).json({deleted: deletedCat})
+
+    }catch(error){
+    res.satus(500).json({error: error.message})
+    console.error(error)    
     }
 }
