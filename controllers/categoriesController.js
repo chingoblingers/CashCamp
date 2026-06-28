@@ -1,4 +1,4 @@
-import { createSingleCategory, getCategories } from "../queries/categoriesQueries.js";
+import { createSingleCategory, getCategories, update } from "../queries/categoriesQueries.js";
 
 export async function createCategory(req,res){
     try{
@@ -28,5 +28,20 @@ export async function getUserCatergories(req, res) {
     }catch(error){
         res.status(500).json({error: error.message})
         console.error(error)
+    }
+}
+
+export async function updateCategory(req, res){
+    try{
+    const {userId} = req.params
+    const {name, kind, group, accountId} = req.body
+    const updatedCat = await update(name,kind,group,userId,accountId)
+    if(!updatedCat){
+    return res.status(404).json({message: "unable to update"})    
+    }
+    res.status(200).json({updated: updatedCat})    
+    }catch(error){
+    res.status(500).json({error: error.message})
+    console.error(error)
     }
 }
