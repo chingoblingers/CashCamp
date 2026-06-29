@@ -19,3 +19,8 @@ export async function updateTran(amount, description, userId, accountId, transId
     const {rows} = await pool.query("UPDATE transactions SET amount = $1, description = $2 WHERE user_id = $3 AND account_id = $4 AND id = $5 RETURNING *",[amount, description, userId, accountId, transId])
     return rows[0]
 }
+
+export async function deletetran(userId, accountId, tranId){
+    const {rows} = await pool.query("DELETE FROM transactions WHERE user_id = $1 AND account_id = $2 AND id = $3 RETURNING *", [userId,accountId,tranId])
+    return rows[0]
+}

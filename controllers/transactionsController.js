@@ -1,4 +1,4 @@
-import { createTransaction, readAtransaction, readAllTransactions, updateTran } from "../queries/transactionsQueries.js";
+import { createTransaction, readAtransaction, readAllTransactions, updateTran, deletetran } from "../queries/transactionsQueries.js";
 
 export async function insertTransaction(req, res){
     try{
@@ -46,7 +46,7 @@ try{
 export async function updateTransaction(req, res){
     try{
     const {userId, accountId, transactionId} = req.params
-    const {amount, desc} = req.body
+    const {amount, description} = req.body
     const transaction = await updateTran(amount,desc,userId,accountId,transactionId)
     if(!transaction){
         return res.status(404).json({message: "unable to find that transaction for updating"})
@@ -56,4 +56,18 @@ export async function updateTransaction(req, res){
     res.status(500).json({error: error.message})
     console.error(error)    
     }
+}
+
+export async function deleteTransaction(req, res){
+try{
+const {userId, accountId, transactionId} = req.params
+const deleted = await deletetran(userId,accountId,transactionId)
+if(!deleted){
+    return res.status(404).json({message: "could not find transaction to delete"})
+}
+res.status(200).json({deleted: deleted})
+}catch(error){
+    res.status(500).json({error: error.message})
+    console.error(error)
+}
 }
