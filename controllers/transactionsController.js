@@ -1,4 +1,4 @@
-import { createTransaction, readAtransaction, readAllTransactions } from "../queries/transactionsQueries.js";
+import { createTransaction, readAtransaction, readAllTransactions, updateTran } from "../queries/transactionsQueries.js";
 
 export async function insertTransaction(req, res){
     try{
@@ -40,5 +40,20 @@ try{
     }catch{
     res.status(500).json({error: error.message})
     console.error(error)
+    }
+}
+
+export async function updateTransaction(req, res){
+    try{
+    const {userId, accountId, transactionId} = req.params
+    const {amount, desc} = req.body
+    const transaction = await updateTran(amount,desc,userId,accountId,transactionId)
+    if(!transaction){
+        return res.status(404).json({message: "unable to find that transaction for updating"})
+    }
+    res.status(200).json({updated: transaction})
+    }catch(error){
+    res.status(500).json({error: error.message})
+    console.error(error)    
     }
 }

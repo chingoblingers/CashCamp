@@ -14,3 +14,8 @@ export async function readAllTransactions(userId, accountId){
     const {rows} = await pool.query("SELECT * FROM transactions WHERE user_id = $1 AND account_id = $2", [userId, accountId])
     return rows
 }
+
+export async function updateTran(amount, description, userId, accountId, transId){
+    const {rows} = await pool.query("UPDATE transactions SET amount = $1, description = $2 WHERE user_id = $3 AND account_id = $4 AND id = $5 RETURNING *",[amount, description, userId, accountId, transId])
+    return rows[0]
+}
