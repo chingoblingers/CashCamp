@@ -1,6 +1,6 @@
 import { getAccountSummary } from "../queries/summaryQueries.js";
 
-export async function HandleAccountSummary(req, res){
+export async function handleAccountSummary(req, res){
     try{
     const {userId, accountId} = req.params
     const accountSummary = await getAccountSummary(userId, accountId)
