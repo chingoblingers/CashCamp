@@ -8,7 +8,7 @@ export async function createCategory(req,res){
      if (!category){
         return res.status(404).json({message: "unable to create category"})
      }
-     res.status(200).json({message: "category has been created"})
+     res.status(200).json({created: category})
 
     }catch(error){
      res.status(500).json({error : error.message})
