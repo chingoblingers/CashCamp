@@ -78,7 +78,7 @@ export async function getRecentTransactions(userId){
         JOIN accounts a ON a.id = t.account_id
         JOIN categories c ON c.id = t.category_id
         WHERE a.user_id = $1
-        ORDER BY t.transaction_date DESC
+        ORDER BY t.transaction_date DESC, t.created_at DESC
         LIMIT 5; 
         `, [userId])
 
