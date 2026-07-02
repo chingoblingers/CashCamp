@@ -12,7 +12,7 @@ export async function getAccountSummary(userId, accountId){
         COALESCE(SUM(CASE 
         WHEN c.kind = 'expense' THEN t.amount
         ELSE 0
-        END),0) AS total_expense,
+        END),0) AS total_expenses,
 
         a.starting_balance +
         COALESCE(SUM(CASE
