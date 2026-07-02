@@ -15,7 +15,7 @@ app.use("/users", UsersRouter)
 app.use("/users/:userId/accounts", AccountsRouter)
 app.use("/users/:userId/categories", CategoriesRouter)
 app.use("/users/:userId/accounts/:accountId/transactions", TransactionsRouter)
-app.use("/users/:userId/accounts/:accountId/summary", SummaryRouter)
+app.use("/users/:userId", SummaryRouter)
 
 app.listen(PORT, () => {
   console.log(`running on PORT:${PORT} successfully`)
