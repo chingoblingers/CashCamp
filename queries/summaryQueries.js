@@ -69,3 +69,18 @@ GROUP by u.id;
 
     return rows[0]
 }
+
+export async function getRecentTransactions(userId){
+    const {rows} = await pool.query(`
+        SELECT t.id AS transaction_id, t.amount, t.transaction_date, t.description,
+        a.id AS account_id, a.account_name, c.id AS category_id, 
+        c.name AS category_name, c.kind AS category_kind FROM transactions t
+        JOIN accounts a ON a.id = t.account_id
+        JOIN categories c ON c.id = t.category_id
+        WHERE a.user_id = $1
+        ORDER BY t.transaction_date DESC
+        LIMIT 5; 
+        `, [userId])
+
+    return rows
+}
