@@ -7,7 +7,8 @@ const usersSql = path.join(__dirname, "../sql", "users.sql")
 const accountsSql = path.join(__dirname, "../sql", "accounts.sql")
 const categoriesSql = path.join(__dirname, "../sql", "categories.sql")
 const transactionsSql = path.join(__dirname, "../sql", "transactions.sql")
-const sqlFiles = [usersSql,accountsSql,categoriesSql,transactionsSql]
+const resetSql = path.join(__dirname, "../sql", "reset.sql")
+const sqlFiles = [resetSql,usersSql,accountsSql,categoriesSql,transactionsSql]
 
 async function runSchema(){
 
