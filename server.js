@@ -5,6 +5,7 @@ import AccountsRouter from "./routes/accountsRoutes.js"
 import CategoriesRouter from "./routes/categoriesRoutes.js"
 import TransactionsRouter from "./routes/transactionsRoutes.js"
 import SummaryRouter from "./routes/summaryRoutes.js"
+import AuthRouter from "./routes/authRoutes.js"
 
 const app = express()
 const PORT = 8000
@@ -16,6 +17,7 @@ app.use("/users/:userId/accounts", AccountsRouter)
 app.use("/users/:userId/categories", CategoriesRouter)
 app.use("/users/:userId/accounts/:accountId/transactions", TransactionsRouter)
 app.use("/users/:userId", SummaryRouter)
+app.use("/auth", AuthRouter)
 
 app.listen(PORT, () => {
   console.log(`running on PORT:${PORT} successfully`)
