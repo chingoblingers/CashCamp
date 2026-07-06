@@ -16,7 +16,7 @@ export async function handleAccountSummary(req, res){
 
 export async function handleUserSummary(req, res){
 try{
-const {userId} = req.params
+const userId = req.user.id
 const userSummary = await getUserSummary(userId)
 if(!userSummary){
     return res.status(404).json({message: "unable to find this user" })
