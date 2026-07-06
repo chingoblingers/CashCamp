@@ -5,6 +5,6 @@ import { requireAuth } from "../middleware/requireAuth.js"
 const summaryRouter = express.Router({mergeParams: true})
 
 summaryRouter.get("/summary", requireAuth, handleUserSummary)
-summaryRouter.get("/accounts/:accountId/summary", handleAccountSummary)
+summaryRouter.get("/accounts/:accountId/summary", requireAuth, handleAccountSummary)
 
 export default summaryRouter

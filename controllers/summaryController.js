@@ -2,7 +2,8 @@ import { getAccountSummary, getUserSummary, getRecentTransactions } from "../que
 
 export async function handleAccountSummary(req, res){
     try{
-    const {userId, accountId} = req.params
+    const userId = req.user.id    
+    const {accountId} = req.params
     const accountSummary = await getAccountSummary(userId, accountId)
     if(!accountSummary){
         return res.status(404).json({message: "unable to find account for summary"})
