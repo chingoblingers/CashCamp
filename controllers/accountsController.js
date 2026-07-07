@@ -20,7 +20,7 @@ export async function createAccount(req, res) {
     const userId = req.user.id
     const {account_name, account_type, starting_balance} = req.body
     const newAccount = await createSingleAccount(userId,account_name,account_type,starting_balance)
-    res.status(200).json({message: `successfully created account ${account_name}`, account: newAccount})
+    res.status(201).json({message: `successfully created account ${account_name}`, account: newAccount})
     }catch(error){
     console.log(error)
     res.status(500).json({error: error.message})
@@ -30,7 +30,8 @@ export async function createAccount(req, res) {
 
 export async function updateAccount(req, res){
     try {
-    const {userId, accountId} = req.params
+    const userId = req.user.id    
+    const {accountId} = req.params
     const {account_name, account_type, starting_balance} = req.body
     const updatedAccount = await updateUserAccount(account_name,account_type,starting_balance,userId,accountId)
     if(!updatedAccount){
@@ -45,8 +46,9 @@ export async function updateAccount(req, res){
 
 export async function deleteAccount(req, res){
     try{
-        const {user_id, id} = req.body
-      const deletedAccount = await deleteAcc(user_id,id)
+        const userId = req.user.id
+        const {id} = req.body
+      const deletedAccount = await deleteAcc(userId,id)
         if(!deletedAccount){
          return  res.status(404).json({message: "No account of that name exists to be deleted"})
         }

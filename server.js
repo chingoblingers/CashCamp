@@ -6,6 +6,7 @@ import CategoriesRouter from "./routes/categoriesRoutes.js"
 import TransactionsRouter from "./routes/transactionsRoutes.js"
 import SummaryRouter from "./routes/summaryRoutes.js"
 import AuthRouter from "./routes/authRoutes.js"
+import { requireAuth } from "./middleware/requireAuth.js"
 
 const app = express()
 const PORT = 8000
@@ -13,7 +14,7 @@ const PORT = 8000
 app.use(express.json())
 app.use("/test", TestRouter)
 app.use("/users", UsersRouter)
-app.use("/me/accounts", AccountsRouter)
+app.use("/me/accounts", requireAuth, AccountsRouter)
 app.use("/users/:userId/categories", CategoriesRouter)
 app.use("/users/:userId/accounts/:accountId/transactions", TransactionsRouter)
 app.use("/me", SummaryRouter)
