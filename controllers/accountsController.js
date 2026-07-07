@@ -3,7 +3,7 @@ import { getUserAccounts,createSingleAccount,updateUserAccount,deleteAcc } from 
 export async function getAccounts(req, res){
  try{
  const userId = req.user.id
- const userAccounts = await getUserAccounts(id)
+ const userAccounts = await getUserAccounts(userId)
  if (!userAccounts){
     return res.status(404).json({error: "No user accounts found"})
  }
