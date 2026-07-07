@@ -16,7 +16,7 @@ app.use("/test", TestRouter)
 app.use("/users", UsersRouter)
 app.use("/me/accounts", requireAuth, AccountsRouter)
 app.use("/me/categories", requireAuth, CategoriesRouter)
-app.use("/users/:userId/accounts/:accountId/transactions", TransactionsRouter)
+app.use("/me/accounts/:accountId/transactions", TransactionsRouter)
 app.use("/me", SummaryRouter)
 app.use("/auth", AuthRouter)
 
