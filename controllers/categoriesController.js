@@ -2,13 +2,13 @@ import { createSingleCategory, getCategories, update, deleteSingleCat } from "..
 
 export async function createCategory(req,res){
     try{
-     const {userId} = req.params   
+     const userId = req.user.id  
      const {name, kind, group} = req.body
      const category = await createSingleCategory(userId, name, kind, group)
      if (!category){
         return res.status(404).json({message: "unable to create category"})
      }
-     res.status(200).json({created: category})
+     res.status(201).json({created: category})
 
     }catch(error){
      res.status(500).json({error : error.message})
@@ -19,10 +19,10 @@ export async function createCategory(req,res){
 
 export async function getUserCatergories(req, res) {
     try{
-        const {userId} = req.params
+        const userId = req.user.id
         const categories = await getCategories(userId)
         if (categories.length === 0){
-            return res.status(404).json({message: "not finding any categoreis broski"})
+            return res.status(200).json([])
         }
         res.status(200).json({categories: categories})
     }catch(error){
@@ -33,7 +33,8 @@ export async function getUserCatergories(req, res) {
 
 export async function updateCategory(req, res){
     try{
-    const {userId, categoryId} = req.params
+    const userId = req.user.id    
+    const {categoryId} = req.params
     const {name, kind, group} = req.body
     const updatedCat = await update(name,kind,group,userId,categoryId)
     if(!updatedCat){
@@ -48,7 +49,8 @@ export async function updateCategory(req, res){
 
 export async function deleteCategory(req, res){
     try{
-    const {userId, categoryId} = req.params
+    const userId = req.user.id    
+    const {categoryId} = req.params
     const deletedCat = await deleteSingleCat(userId,categoryId)
     if (!deletedCat){
     return res.status(404).json({message: "unable to delete"})

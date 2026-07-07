@@ -16,6 +16,6 @@ export async function update(name, kind, group, userId, catId){
 }
 
 export async function deleteSingleCat(userId, catId){
-    const {rows} = pool.query("DELETE FROM categories WHERE id = $1 AND user_id = $2 RETURNING *", [catId, userId])
+    const {rows} = await pool.query("DELETE FROM categories WHERE id = $1 AND user_id = $2 RETURNING *", [catId, userId])
     return rows[0]
 }
