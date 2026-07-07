@@ -13,7 +13,7 @@ const PORT = 8000
 app.use(express.json())
 app.use("/test", TestRouter)
 app.use("/users", UsersRouter)
-app.use("/users/:userId/accounts", AccountsRouter)
+app.use("/me/accounts", AccountsRouter)
 app.use("/users/:userId/categories", CategoriesRouter)
 app.use("/users/:userId/accounts/:accountId/transactions", TransactionsRouter)
 app.use("/me", SummaryRouter)

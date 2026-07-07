@@ -2,7 +2,7 @@ import { getUserAccounts,createSingleAccount,updateUserAccount,deleteAcc } from 
 
 export async function getAccounts(req, res){
  try{
- const {id} = req.params
+ const userId = req.user.id
  const userAccounts = await getUserAccounts(id)
  if (!userAccounts){
     return res.status(404).json({error: "No user accounts found"})
@@ -17,7 +17,7 @@ export async function getAccounts(req, res){
 
 export async function createAccount(req, res) {
     try{
-    const {userId} = req.params
+    const userId = req.user.id
     const {account_name, account_type, starting_balance} = req.body
     const newAccount = await createSingleAccount(userId,account_name,account_type,starting_balance)
     res.status(200).json({message: `successfully created account ${account_name}`, account: newAccount})
