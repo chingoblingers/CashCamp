@@ -5,7 +5,7 @@ export async function getAccounts(req, res){
  const userId = req.user.id
  const userAccounts = await getUserAccounts(userId)
  if (!userAccounts){
-    return res.status(404).json({error: "No user accounts found"})
+    return res.status(200).json([])
  }
  res.status(200).json({account: userAccounts})
  }catch(error){
