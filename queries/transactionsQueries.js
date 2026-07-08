@@ -1,5 +1,16 @@
 import { pool } from "../db/db.js";
 
+export async function checkAccountOwnership(accountId, userId){
+    const {rows} = await pool.query(`SELECT id FROM accounts WHERE id = $1 AND user_id = $2`,[accountId, userId])
+    return rows[0]
+}
+
+export async function checkCategoryOwnership(categoryId, userId){
+    const {rows} = await pool.query(`SELECT id FROM categories WHERE id = $1 AND user_id = $2`, [categoryId, userId])
+    return rows[0]
+}
+
+
 export async function createTransaction(userId, accId, catId, amount, desc){
 const {rows} = await pool.query("INSERT INTO transactions (user_id, account_id, category_id, amount, description) VALUES ($1,$2,$3,$4,$5) RETURNING *", [userId,accId,catId,amount,desc])
 return rows[0]
