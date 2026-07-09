@@ -6,14 +6,14 @@ export async function insertTransaction(req, res){
     const {accountId} = req.params
     const {amount, description, categoryId } = req.body
     if (!amount || !categoryId) {
-    return res.status(400).json({ message: "Missing required field" })
+    return res.status(401).json({ message: "Missing required field" })
     }
     const ownedAccount = await checkAccountOwnership(accountId, userId)
     const ownedCategory = await checkCategoryOwnership(categoryId, userId)
     if(!ownedAccount){
         return res.status(403).json({message: "you do not have access to this account"})
     } else if (!ownedCategory){
-        return res.status(403).json({message: "you do not have access to this category"})
+        return res.status(403).json({message: "you do not have access to this category"})4
     }
     const newTransaction = await createTransaction(userId,accountId,categoryId,amount,description)
     if(!newTransaction){
