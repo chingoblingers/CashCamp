@@ -13,7 +13,7 @@ export async function insertTransaction(req, res){
     if(!ownedAccount){
         return res.status(403).json({message: "you do not have access to this account"})
     } else if (!ownedCategory){
-        return res.status(403).json({message: "you do not have access to this category"})4
+        return res.status(403).json({message: "you do not have access to this category"})
     }
     const newTransaction = await createTransaction(userId,accountId,categoryId,amount,description)
     if(!newTransaction){
