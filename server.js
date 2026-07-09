@@ -16,8 +16,8 @@ app.use("/test", TestRouter)
 app.use("/users", UsersRouter)
 app.use("/me/accounts", requireAuth, AccountsRouter)
 app.use("/me/categories", requireAuth, CategoriesRouter)
-app.use("/me/accounts/:accountId/transactions", TransactionsRouter)
-app.use("/me", SummaryRouter)
+app.use("/me/accounts/:accountId/transactions", requireAuth, TransactionsRouter)
+app.use("/me", requireAuth, SummaryRouter)
 app.use("/auth", AuthRouter)
 
 app.listen(PORT, () => {
