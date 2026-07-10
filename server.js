@@ -7,11 +7,13 @@ import TransactionsRouter from "./routes/transactionsRoutes.js"
 import SummaryRouter from "./routes/summaryRoutes.js"
 import AuthRouter from "./routes/authRoutes.js"
 import { requireAuth } from "./middleware/requireAuth.js"
+import cors from 'cors'
 
 const app = express()
 const PORT = 8000
 
 app.use(express.json())
+app.use(cors({origin: "http://localhost:5173"}))
 app.use("/test", TestRouter)
 app.use("/users", UsersRouter)
 app.use("/me/accounts", requireAuth, AccountsRouter)
