@@ -1,14 +1,16 @@
 import {Link} from 'react-router-dom'
 import {useState} from 'react'
+import {signupUser} from './../api/authApi.js'
 
 export default function SignupPage(){
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    function handleSubmit(e){
+   async function handleSubmit(e){
         e.preventDefault()
-        console.log({ name, email, password })
+     const data = await signupUser(name, email, password)
+     console.log(data)
     }
 
     return (
