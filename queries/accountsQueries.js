@@ -1,6 +1,6 @@
 import { pool } from "../db/db.js";
 
-export async function getUserAccounts(id){
+export async function getAllUserAccounts(id){
     const {rows} = await pool.query("SELECT * FROM accounts WHERE user_id = $1", [id])
     return rows
 }

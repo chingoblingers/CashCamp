@@ -3,7 +3,7 @@ import { getUserAccounts,createSingleAccount,updateUserAccount,deleteAcc } from 
 export async function getAccounts(req, res){
  try{
  const userId = req.user.id
- const userAccounts = await getUserAccounts(userId)
+ const userAccounts = await getAllUserAccounts(userId)
  if (!userAccounts){
     return res.status(200).json([])
  }
