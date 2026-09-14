@@ -30,12 +30,25 @@ export default function DashboardPage(){
                 <>
                 <header>
                     <h1> Dashboard Page </h1>
-                    <h3> Welcome Back! </h3>
+                    <p> Welcome Back! </p>
                 </header>
                 <main>
-                    <p> Your Total Income is: {dashboardData.summary.total_income}</p>
-                    <p> Your Total Expenses are: {dashboardData.summary.total_expenses}</p>
-                    <p> Your Current Balance is: {dashboardData.summary.current_balance}</p>
+                    <section className="summaryContainer">
+                        <p>Total Income: {dashboardData.summary.total_income}</p>
+                        <p>Total Expenses: {dashboardData.summary.total_expenses}</p>
+                        <p>Current Balance: {dashboardData.summary.current_balance}</p>
+                    </section>
+                    <section className="transactionContainer">
+                        {dashboardData.recent_transactions.length === 0 ? (<p>No recent transactions</p>): (
+                            <ul>
+                                {dashboardData.recent_transactions.map(transaction =>{
+                                  return <li key={transaction.transaction_id}>{transaction.description|| 'No description'} - {transaction.amount}</li>
+                                })}
+                            </ul>
+                        ) }
+                    </section>
+
+
                 </main>
                 </>
             )}        
