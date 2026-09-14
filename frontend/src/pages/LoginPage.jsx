@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import { useState } from 'react'
 import { loginUser } from '../api/authApi.js'
 
@@ -6,6 +6,7 @@ export default function LoginPage(){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
+    const navigate = useNavigate()
 
     
    async function handleSubmit(e){
@@ -16,7 +17,8 @@ export default function LoginPage(){
                 setError(data.message|| "Login Failed")
                 return
             }
-            console.log(data)
+            localStorage.setItem('token', data.token)
+            navigate('/dashboard')
 
         }catch(error){
 
