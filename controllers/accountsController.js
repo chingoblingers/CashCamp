@@ -1,4 +1,4 @@
-import { getUserAccounts,createSingleAccount,updateUserAccount,deleteAcc } from "../queries/accountsQueries.js";
+import { getAllUserAccounts,createSingleAccount,updateUserAccount,deleteAcc } from "../queries/accountsQueries.js";
 
 export async function getAccounts(req, res){
  try{

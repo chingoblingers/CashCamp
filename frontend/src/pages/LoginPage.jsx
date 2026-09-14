@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom'
 import { useState } from 'react'
+import { loginUser } from '../api/authApi.js'
 
 export default function LoginPage(){
     const [email, setEmail] = useState('')
@@ -10,6 +11,12 @@ export default function LoginPage(){
    async function handleSubmit(e){
         try{
             e.preventDefault()
+            const data = await loginUser(email, password)
+            if (!data.token){
+                setError(data.message|| "Login Failed")
+                return
+            }
+            console.log(data)
 
         }catch(error){
 
