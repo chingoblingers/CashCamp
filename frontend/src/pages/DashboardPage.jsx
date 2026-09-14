@@ -9,7 +9,6 @@ export default function DashboardPage(){
     useEffect(()=>{
         async function loadDashboard(){
             try{
-            setLoading(true)
             const dashboardInfo = await getDashboardSummary()
             setDashboardData(dashboardInfo)
             }catch(error){
@@ -24,6 +23,12 @@ export default function DashboardPage(){
 
 
     return (
-        <h1> Dashboard Page </h1>
+        <>
+            <h1> Dashboard Page </h1>
+            {loading && <p>Loading dashboard...</p>}
+            {error && <p>{error}</p>}
+            {dashboardData && <pre>{JSON.stringify(dashboardData, null, 2)}</pre>}        
+        </>
+
     )
 }
