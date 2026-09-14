@@ -1,11 +1,26 @@
 import { getDashboardSummary } from "../api/summaryApi.js"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function DashboardPage(){
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
     const [dashboardData, setDashboardData] = useState(null)
 
+    useEffect(()=>{
+        async function loadDashboard(){
+            try{
+            setLoading(true)
+            const dashboardInfo = await getDashboardSummary()
+            setDashboardData(dashboardInfo)
+            }catch(error){
+                console.error(error)
+                setError('Unable to load dashboard')
+            }finally{
+                setLoading(false)
+            }
+        }
+        loadDashboard()
+    }, [])
 
 
     return (
