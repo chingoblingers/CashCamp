@@ -13,3 +13,7 @@ export const AuthContext = createContext()
     )
 }
 
+// Reminder to myself I can also use a custom hook like the one below. 
+// export function useAuth() {
+//     return useContext(AuthContext)
+// }
