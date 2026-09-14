@@ -24,10 +24,21 @@ export default function DashboardPage(){
 
     return (
         <>
-            <h1> Dashboard Page </h1>
             {loading && <p>Loading dashboard...</p>}
             {error && <p>{error}</p>}
-            {dashboardData && <pre>{JSON.stringify(dashboardData, null, 2)}</pre>}        
+            {dashboardData && (
+                <>
+                <header>
+                    <h1> Dashboard Page </h1>
+                    <h3> Welcome Back! </h3>
+                </header>
+                <main>
+                    <p> Your Total Income is: {dashboardData.summary.total_income}</p>
+                    <p> Your Total Expenses are: {dashboardData.summary.total_expenses}</p>
+                    <p> Your Current Balance is: {dashboardData.summary.current_balance}</p>
+                </main>
+                </>
+            )}        
         </>
 
     )
