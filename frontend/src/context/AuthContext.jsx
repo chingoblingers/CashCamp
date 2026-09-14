@@ -1,6 +1,6 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useContext } from "react";
 
-export const AuthContext = createContext()
+const AuthContext = createContext()
 
  export function AuthProvider({children}){
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('token') ? true: false)
@@ -13,7 +13,6 @@ export const AuthContext = createContext()
     )
 }
 
-// Reminder to myself I can also use a custom hook like the one below. 
-// export function useAuth() {
-//     return useContext(AuthContext)
-// }
+export function useAuth() {
+    return useContext(AuthContext)
+}
