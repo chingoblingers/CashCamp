@@ -13,7 +13,8 @@ export async function getCategories(){
 
 export async function createCategory(name, kind, group){
     const token = localStorage.getItem('token')
-    const response = await fetch(`http://localhost:8000/me/categories`, {method: 'POST', headers:{Authorization: `Bearer ${token}`}, body: JSON.stringify({name, kind, group})})
+    const response = await fetch(`http://localhost:8000/me/categories`,
+        {method: 'POST', headers:{Authorization: `Bearer ${token}`, 'Content-Type': 'application/json'}, body: JSON.stringify({name, kind, group})})
     if (response.status === 401){
         throw new Error('Unauthorized')
     }
