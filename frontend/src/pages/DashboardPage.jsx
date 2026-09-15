@@ -1,7 +1,7 @@
 import { getDashboardSummary } from "../api/summaryApi.js"
 import { useState, useEffect } from "react"
 import { useAuth } from "../context/AuthContext.jsx"
-import { getAccounts } from "../api/accountsApi.js"
+import { createAccount, getAccounts } from "../api/accountsApi.js"
 
 export default function DashboardPage(){
     const [loading, setLoading] = useState(true)
@@ -9,6 +9,9 @@ export default function DashboardPage(){
     const [dashboardData, setDashboardData] = useState(null)
     const {logout} = useAuth()
     const [accounts, setAccounts] = useState([])
+    const [accountName, setAccountName] = useState("")
+    const [accountType, setAccountType] = useState("")
+    const [startingBalance, setStartingBalance] = useState(0)
 
     useEffect(()=>{
         async function loadDashboardData(){
@@ -30,6 +33,23 @@ export default function DashboardPage(){
         }
         loadDashboardData()
     }, [])
+
+    async function handleCreateAccount(e) {
+        try{
+            e.preventDefault()
+            const newAccount = await createAccount(accountName, accountType, startingBalance)
+            if (!newAccount){
+                setError('Account creation failed')
+                return
+            }
+            setAccounts(prevAccount => [...prevAccount, newAccount])
+            setAccountName('')
+            setAccountType('')
+            setStartingBalance(0)
+        }catch(error){
+            console.error(error)
+    }
+}
 
 
     return (
@@ -67,7 +87,17 @@ export default function DashboardPage(){
                                     </div>
                         }))}
                     </section>
-
+                    <section className="formContainer">
+                        <form className="createAccountsForm" onSubmit={handleCreateAccount}>
+                            <label htmlFor="accountName">Account Name:</label>
+                            <input type="text" id="accountName" placeholder="Ken's Card Game Account" name="account_name" value={accountName} onChange={(e)=>setAccountName(e.target.value)}/>
+                            <label htmlFor="accountType">Account Type:</label>
+                            <input type="text" id="accountType" placeholder="Checking" name="account_type" value={accountType} onChange={(e)=>setAccountType(e.target.value)}/>
+                            <label htmlFor="startingBalance">Starting Balance:</label>
+                            <input type="number" id="startingBalance" placeholder="100" name="starting_balance" value={startingBalance} onChange={(e)=>setStartingBalance(Number(e.target.value))}/>
+                            <button type="submit">Create Account</button>
+                        </form>
+                    </section>
                 </main>
                 </>
             )}        
