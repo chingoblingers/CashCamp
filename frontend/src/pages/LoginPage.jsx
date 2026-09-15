@@ -1,12 +1,14 @@
 import {Link, useNavigate} from 'react-router-dom'
 import { useState } from 'react'
 import { loginUser } from '../api/authApi.js'
+import { useAuth } from '../context/AuthContext.jsx'
 
 export default function LoginPage(){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const navigate = useNavigate()
+    const {setIsLoggedIn} = useAuth
 
     
    async function handleSubmit(e){
@@ -18,6 +20,7 @@ export default function LoginPage(){
                 return
             }
             localStorage.setItem('token', data.token)
+            setIsLoggedIn(true)
             navigate('/dashboard')
 
         }catch(error){
