@@ -11,3 +11,19 @@ export async function getAccounts(){
     return data.account
 
 }
+
+export async function createAccount(account_name, account_type, starting_balance){
+    const token = localStorage.getItem('token')
+    const response = await fetch(`http://localhost:8000/me/accounts`, 
+        {method: 'POST', headers:{Authorization: `Bearer ${token}`, 'Content-Type': 'application/json'}, body: JSON.stringify({
+            account_name, account_type, starting_balance
+            })})
+    if (response.status === 401){
+        throw new Error('Unauthorized')
+    }
+    if (!response.ok){
+        throw new Error('Unable to complete request.')
+    }
+    const data = await response.json()
+    return data.account
+}
