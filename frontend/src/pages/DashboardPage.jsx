@@ -61,6 +61,7 @@ export default function DashboardPage(){
             return
             }
             console.error(error)
+            setError(error.message)
     }
 }
 
@@ -76,12 +77,17 @@ async function handleDeleteAccount(accountId){
     return
     }
     console.error(error)
+    setError(error.message)
     }
 }
 
 async function handleCreateTransaction(e){
     try{
         e.preventDefault()
+        if (!accountId || !categoryId || !amount) {
+        setError("Please complete the required transaction fields.")
+        return
+        }
         const newTransaction = await createTransaction(accountId, categoryId, amount, description)
         if(!newTransaction){
             setError("Unable to create transaction")
@@ -100,6 +106,7 @@ async function handleCreateTransaction(e){
     return
     }
     console.error(error)
+    setError(error.message)
     }
 }
 
@@ -143,28 +150,28 @@ async function handleCreateTransaction(e){
                     <section className="formContainer">
                         <form className="createAccountsForm" onSubmit={handleCreateAccount}>
                             <label htmlFor="accountName">Account Name:</label>
-                            <input type="text" id="accountName" placeholder="Ken's Card Game Account" name="account_name" value={accountName} onChange={(e)=>setAccountName(e.target.value)}/>
+                            <input type="text" id="accountName" placeholder="Ken's Card Game Account" name="account_name" value={accountName} onChange={(e)=>setAccountName(e.target.value)} required/>
                             <label htmlFor="accountType">Account Type:</label>
-                            <input type="text" id="accountType" placeholder="Checking" name="account_type" value={accountType} onChange={(e)=>setAccountType(e.target.value)}/>
+                            <input type="text" id="accountType" placeholder="Checking" name="account_type" value={accountType} onChange={(e)=>setAccountType(e.target.value)} required/>
                             <label htmlFor="startingBalance">Starting Balance:</label>
-                            <input type="number" id="startingBalance" name="starting_balance" value={startingBalance} onChange={(e)=>setStartingBalance(Number(e.target.value))}/>
+                            <input type="number" id="startingBalance" name="starting_balance" value={startingBalance} onChange={(e)=>setStartingBalance(Number(e.target.value))} required/>
                             <button type="submit">Create Account</button>
                         </form>
-                        <form className="tranactionForm" onSubmit={handleCreateTransaction}>
-                            <select value={accountId} onChange={(e)=>setAccountId(e.target.value)}>
+                        <form className="transactionForm" onSubmit={handleCreateTransaction}>
+                            <select value={accountId} onChange={(e)=>setAccountId(e.target.value)} required>
                                 <option value=""> Choose Account </option>
                                 {accounts.map(account => {
                                     return <option key={account.id} value={account.id}>{account.account_name}</option>
                                 })}
                             </select>
-                            <select value={categoryId} onChange={(e)=>setCategoryId(e.target.value)}>
+                            <select value={categoryId} onChange={(e)=>setCategoryId(e.target.value)}required>
                                 <option value="">Choose Category</option>
                                 {categories.map(category =>{
                                     return <option key={category.id} value={category.id}>{category.name}</option>
                                 })}
                             </select>
                             <label htmlFor="transactionAmount">Transaction Amount:</label>
-                            <input type="number" id="transactionAmount" name="transaction_amount" value={amount} onChange={(e)=>setAmount(Number(e.target.value))}/>
+                            <input type="number" id="transactionAmount" name="transaction_amount" value={amount} onChange={(e)=>setAmount(Number(e.target.value))} required/>
                             <label htmlFor="description">Description:</label>
                             <input type="text" id="description" placeholder="Purchase from Kroger" name="description" value={description} onChange={(e)=>setDescription(e.target.value)}/>
                             <button type="submit"> Add Transaction </button>
