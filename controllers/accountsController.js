@@ -47,8 +47,8 @@ export async function updateAccount(req, res){
 export async function deleteAccount(req, res){
     try{
         const userId = req.user.id
-        const {id} = req.body
-      const deletedAccount = await deleteAcc(userId,id)
+        const {accountId} = req.params
+      const deletedAccount = await deleteAcc(userId,accountId)
         if(!deletedAccount){
          return  res.status(404).json({message: "No account of that name exists to be deleted"})
         }
