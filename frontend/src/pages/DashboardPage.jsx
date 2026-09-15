@@ -128,8 +128,12 @@ async function handleCreateCategory(e){
         setCategoryKind('expense')
         setCategoryName('')
     }catch(error){
-        console.error(error)
-        setError(error.message)  
+    if (error.message === "Unauthorized") {
+    logout()
+    return
+    }
+    console.error(error)
+    setError(error.message)
     }
 
 }
@@ -189,7 +193,8 @@ async function handleCreateCategory(e){
                             <select value={categoryKind} onChange={(e)=>setCategoryKind(e.target.value)}>
                                 <option value="expense">Expense</option>
                                 <option value="income">Income</option>
-                            </select>  
+                            </select>
+                            <button type="submit">Create Category</button>  
                         </form>
                         <form className="transactionForm" onSubmit={handleCreateTransaction}>
                             <select value={accountId} onChange={(e)=>setAccountId(e.target.value)} required>
