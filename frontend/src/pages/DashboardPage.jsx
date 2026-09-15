@@ -37,6 +37,7 @@ export default function DashboardPage(){
                 <header>
                     <h1> Dashboard Page </h1>
                     <p> Welcome Back! </p>
+                    <button onClick={logout}> Logout </button>
                 </header>
                 <main>
                     <section className="summaryContainer">

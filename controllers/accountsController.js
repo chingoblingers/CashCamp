@@ -5,7 +5,7 @@ export async function getAccounts(req, res){
  const userId = req.user.id
  const userAccounts = await getAllUserAccounts(userId)
  if (!userAccounts){
-    return res.status(200).json([])
+    return res.status(200).json({ account: [] })
  }
  res.status(200).json({account: userAccounts})
  }catch(error){
