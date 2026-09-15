@@ -56,6 +56,10 @@ export default function DashboardPage(){
             setAccountType('')
             setStartingBalance(0)
         }catch(error){
+            if (error.message === "Unauthorized") {
+            logout()
+            return
+            }
             console.error(error)
     }
 }
@@ -67,7 +71,11 @@ async function handleDeleteAccount(accountId){
           return prevAccount.filter(account=> account.id !== accountId)
         })
     }catch(error){
-        console.error(error)
+    if (error.message === "Unauthorized") {
+    logout()
+    return
+    }
+    console.error(error)
     }
 }
 
@@ -87,7 +95,11 @@ async function handleCreateTransaction(e){
         setCategoryId('')
         
     }catch(error){
-        console.error(error)
+    if (error.message === "Unauthorized") {
+    logout()
+    return
+    }
+    console.error(error)
     }
 }
 
