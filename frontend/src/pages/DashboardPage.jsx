@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext.jsx"
 import { createAccount, getAccounts, deleteAccount } from "../api/accountsApi.js"
 import { getCategories } from '../api/categoriesApi.js'
 import { createTransaction } from "../api/transactionsApi.js"
-import { createCategory } from "../api/categoriesApi.js"
+import { createCategory, deleteCategory } from "../api/categoriesApi.js"
 
 export default function DashboardPage(){
     const [loading, setLoading] = useState(true)
@@ -138,6 +138,21 @@ async function handleCreateCategory(e){
 
 }
 
+async function handleDeleteCategory(categoryId){
+    try{
+        await deleteCategory(categoryId)
+        setCategories(prevCat => prevCat.filter(cat => {
+            return cat.id !== categoryId
+        }))
+    }catch(error){
+    if (error.message === "Unauthorized") {
+    logout()
+    return
+    }
+    console.error(error)
+    setError(error.message) 
+    }
+}
 
     return (
         <>
@@ -215,6 +230,9 @@ async function handleCreateCategory(e){
                             <input type="text" id="description" placeholder="Purchase from Kroger" name="description" value={description} onChange={(e)=>setDescription(e.target.value)}/>
                             <button type="submit"> Add Transaction </button>
                     </form>
+                    </section>
+                    <section className="categoriesList">
+                            {categories.map(category => <div key={category.id}> <p>{category.name}</p> <button onClick={()=>handleDeleteCategory(category.id)}>Delete Category</button> </div>)}   
                     </section>
                 </main>
                 </>
