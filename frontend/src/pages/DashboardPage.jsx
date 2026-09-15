@@ -14,6 +14,10 @@ export default function DashboardPage(){
     const [accountType, setAccountType] = useState("")
     const [startingBalance, setStartingBalance] = useState(0)
     const [categories, setCategories] = useState([])
+    const [accountId, setAccountId] = useState("")
+    const [categoryId, setCategoryId] = useState("")
+    const [amount, setAmount] = useState(0)
+    const [description, setDescription] = useState("")
 
     useEffect(()=>{
         async function loadDashboardData(){
@@ -110,9 +114,28 @@ async function handleDeleteAccount(accountId){
                             <label htmlFor="accountType">Account Type:</label>
                             <input type="text" id="accountType" placeholder="Checking" name="account_type" value={accountType} onChange={(e)=>setAccountType(e.target.value)}/>
                             <label htmlFor="startingBalance">Starting Balance:</label>
-                            <input type="number" id="startingBalance" placeholder="100" name="starting_balance" value={startingBalance} onChange={(e)=>setStartingBalance(Number(e.target.value))}/>
+                            <input type="number" id="startingBalance" name="starting_balance" value={startingBalance} onChange={(e)=>setStartingBalance(Number(e.target.value))}/>
                             <button type="submit">Create Account</button>
                         </form>
+                        <form className="tranactionForm" onSubmit={handleCreateTransaction}>
+                            <select value={accountId} onChange={(e)=>setAccountId(e.target.value)}>
+                                <option value=""> Choose Account </option>
+                                {accounts.map(account => {
+                                    return <option key={account.id} value={account.id}>{account.account_name}</option>
+                                })}
+                            </select>
+                            <select value={categoryId} onChange={(e)=>setCategoryId(e.target.value)}>
+                                <option value="">Choose Category</option>
+                                {categories.map(category =>{
+                                    return <option key={category.id} value={category.id}>{category.name}</option>
+                                })}
+                            </select>
+                            <label htmlFor="transactionAmount">Transaction Amount:</label>
+                            <input type="number" id="transactionAmount" name="transaction_amount" value={amount} onChange={(e)=>setAmount(Number(e.target.value))}/>
+                            <label htmlFor="description">Description:</label>
+                            <input type="text" id="description" placeholder="Purchase from Kroger" name="description" value={description} onChange={(e)=>setDescription(e.target.value)}/>
+                            <button type="submit">Add <Transaction></Transaction></button>
+                    </form>
                     </section>
                 </main>
                 </>
