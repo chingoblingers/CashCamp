@@ -1,10 +1,12 @@
 import { getDashboardSummary } from "../api/summaryApi.js"
 import { useState, useEffect } from "react"
+import { useAuth } from "../context/AuthContext.jsx"
 
 export default function DashboardPage(){
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
     const [dashboardData, setDashboardData] = useState(null)
+    const {logout} = useAuth
 
     useEffect(()=>{
         async function loadDashboard(){
@@ -12,6 +14,10 @@ export default function DashboardPage(){
             const dashboardInfo = await getDashboardSummary()
             setDashboardData(dashboardInfo)
             }catch(error){
+                if (error.message === 'Unauthorized'){
+                    logout()
+                    return
+                }
                 console.error(error)
                 setError('Unable to load dashboard')
             }finally{
