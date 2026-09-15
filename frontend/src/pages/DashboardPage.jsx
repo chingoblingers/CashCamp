@@ -1,18 +1,22 @@
 import { getDashboardSummary } from "../api/summaryApi.js"
 import { useState, useEffect } from "react"
 import { useAuth } from "../context/AuthContext.jsx"
+import { getAccounts } from "../api/accountsApi.js"
 
 export default function DashboardPage(){
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
     const [dashboardData, setDashboardData] = useState(null)
     const {logout} = useAuth()
+    const [accounts, setAccounts] = useState([])
 
     useEffect(()=>{
-        async function loadDashboard(){
+        async function loadDashboardData(){
             try{
             const dashboardInfo = await getDashboardSummary()
             setDashboardData(dashboardInfo)
+            const acc = await getAccounts()
+            setAccounts(acc)
             }catch(error){
                 if (error.message === 'Unauthorized'){
                     logout()
@@ -24,7 +28,7 @@ export default function DashboardPage(){
                 setLoading(false)
             }
         }
-        loadDashboard()
+        loadDashboardData()
     }, [])
 
 
