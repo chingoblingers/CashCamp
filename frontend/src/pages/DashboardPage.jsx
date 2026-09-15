@@ -58,7 +58,15 @@ export default function DashboardPage(){
                             </ul>
                         ) }
                     </section>
-
+                    <section className="accountsContainer">
+                        {accounts.length === 0 ? (<p>No accounts found</p>): (accounts.map(account =>{
+                            return  <div key={account.id}>
+                                        <p>{account.account_name}</p>
+                                        <p>{account.account_type}</p>
+                                        <p>{account.starting_balance}</p>
+                                    </div>
+                        }))}
+                    </section>
 
                 </main>
                 </>
