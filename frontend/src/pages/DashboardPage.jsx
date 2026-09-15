@@ -2,6 +2,7 @@ import { getDashboardSummary } from "../api/summaryApi.js"
 import { useState, useEffect } from "react"
 import { useAuth } from "../context/AuthContext.jsx"
 import { createAccount, getAccounts, deleteAccount } from "../api/accountsApi.js"
+import { getCategories } from '../api/categoriesApi.js'
 
 export default function DashboardPage(){
     const [loading, setLoading] = useState(true)
@@ -12,6 +13,7 @@ export default function DashboardPage(){
     const [accountName, setAccountName] = useState("")
     const [accountType, setAccountType] = useState("")
     const [startingBalance, setStartingBalance] = useState(0)
+    const [categories, setCategories] = useState([])
 
     useEffect(()=>{
         async function loadDashboardData(){
@@ -20,6 +22,8 @@ export default function DashboardPage(){
             setDashboardData(dashboardInfo)
             const acc = await getAccounts()
             setAccounts(acc)
+            const cat = await getCategories()
+            setCategories(cat)
             }catch(error){
                 if (error.message === 'Unauthorized'){
                     logout()
