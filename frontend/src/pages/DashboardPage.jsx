@@ -1,7 +1,7 @@
 import { getDashboardSummary } from "../api/summaryApi.js"
 import { useState, useEffect } from "react"
 import { useAuth } from "../context/AuthContext.jsx"
-import { createAccount, getAccounts } from "../api/accountsApi.js"
+import { createAccount, getAccounts, deleteAccount } from "../api/accountsApi.js"
 
 export default function DashboardPage(){
     const [loading, setLoading] = useState(true)
@@ -51,6 +51,17 @@ export default function DashboardPage(){
     }
 }
 
+async function handleDeleteAccount(accountId){
+    try{
+        await deleteAccount(accountId)
+        setAccounts(prevAccount => {
+          return prevAccount.filter(account=> account.id !== accountId)
+        })
+    }catch(error){
+        console.error(error)
+    }
+}
+
 
     return (
         <>
@@ -84,6 +95,7 @@ export default function DashboardPage(){
                                         <p>{account.account_name}</p>
                                         <p>{account.account_type}</p>
                                         <p>{account.starting_balance}</p>
+                                        <button onClick={()=>handleDeleteAccount(account.id)}>Delete Account</button>
                                     </div>
                         }))}
                     </section>
