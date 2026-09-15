@@ -1,4 +1,4 @@
-async function getAccounts(){
+export async function getAccounts(){
     const token = localStorage.getItem('token')
     const response = await fetch(`http://localhost:8000/me/accounts`, {method: 'GET', headers:{Authorization: `Bearer ${token}`}})
     if (response.status === 401){
