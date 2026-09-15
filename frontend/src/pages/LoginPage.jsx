@@ -8,7 +8,7 @@ export default function LoginPage(){
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const navigate = useNavigate()
-    const {setIsLoggedIn} = useAuth
+    const {setIsLoggedIn} = useAuth()
 
     
    async function handleSubmit(e){
@@ -24,7 +24,8 @@ export default function LoginPage(){
             navigate('/dashboard')
 
         }catch(error){
-
+            console.error(error)
+            setError('Login Failed')
         }
         
         
