@@ -79,7 +79,12 @@ async function handleCreateTransaction(e){
             setError("Unable to create transaction")
             return
         }
-
+        const updatedDashboard = await getDashboardSummary()
+        setDashboardData(updatedDashboard)
+        setAmount(0)
+        setDescription('')
+        setAccountId('')
+        setCategoryId('')
         
     }catch(error){
         console.error(error)
