@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext.jsx"
 import { createAccount, getAccounts, deleteAccount } from "../api/accountsApi.js"
 import { getCategories } from '../api/categoriesApi.js'
 import { createTransaction } from "../api/transactionsApi.js"
+import { createCategory } from "../api/categoriesApi.js"
 
 export default function DashboardPage(){
     const [loading, setLoading] = useState(true)
@@ -19,6 +20,10 @@ export default function DashboardPage(){
     const [categoryId, setCategoryId] = useState("")
     const [amount, setAmount] = useState(0)
     const [description, setDescription] = useState("")
+    const [categoryName, setCategoryName] = useState("")
+    const [categoryKind, setCategoryKind] = useState('expense')
+    const [categoryGroup, setCategoryGroup] = useState('')
+
 
     useEffect(()=>{
         async function loadDashboardData(){
@@ -110,6 +115,25 @@ async function handleCreateTransaction(e){
     }
 }
 
+async function handleCreateCategory(e){
+    try{
+        e.preventDefault()
+        const newCategory = await createCategory(categoryName, categoryKind, categoryGroup)
+        if(!newCategory){
+            setError('Unable to create category')
+            return
+        }
+        setCategories(prevCategory=> [...prevCategory, newCategory])
+        setCategoryGroup('')
+        setCategoryKind('expense')
+        setCategoryName('')
+    }catch(error){
+        console.error(error)
+        setError(error.message)  
+    }
+
+}
+
 
     return (
         <>
@@ -156,6 +180,16 @@ async function handleCreateTransaction(e){
                             <label htmlFor="startingBalance">Starting Balance:</label>
                             <input type="number" id="startingBalance" name="starting_balance" value={startingBalance} onChange={(e)=>setStartingBalance(Number(e.target.value))} required/>
                             <button type="submit">Create Account</button>
+                        </form>
+                        <form className="categoryForm" onSubmit={handleCreateCategory}>
+                            <label htmlFor="catName">Category Name:</label>
+                            <input type="text" id="catName" placeholder="Fast Food.." name="catName" value={categoryName} onChange={(e)=>setCategoryName(e.target.value)} required/>
+                            <label htmlFor="catGroup">Category Group:</label>
+                            <input type="text" id="catGroup" placeholder="Expenses.." name="catGroup" value={categoryGroup} onChange={(e)=>setCategoryGroup(e.target.value)} required/>
+                            <select value={categoryKind} onChange={(e)=>setCategoryKind(e.target.value)}>
+                                <option value="expense">Expense</option>
+                                <option value="income">Income</option>
+                            </select>  
                         </form>
                         <form className="transactionForm" onSubmit={handleCreateTransaction}>
                             <select value={accountId} onChange={(e)=>setAccountId(e.target.value)} required>
