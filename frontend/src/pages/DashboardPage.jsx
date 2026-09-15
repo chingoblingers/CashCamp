@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { useAuth } from "../context/AuthContext.jsx"
 import { createAccount, getAccounts, deleteAccount } from "../api/accountsApi.js"
 import { getCategories } from '../api/categoriesApi.js'
+import { createTransaction } from "../api/transactionsApi.js"
 
 export default function DashboardPage(){
     const [loading, setLoading] = useState(true)
@@ -65,6 +66,21 @@ async function handleDeleteAccount(accountId){
         setAccounts(prevAccount => {
           return prevAccount.filter(account=> account.id !== accountId)
         })
+    }catch(error){
+        console.error(error)
+    }
+}
+
+async function handleCreateTransaction(e){
+    try{
+        e.preventDefault()
+        const newTransaction = await createTransaction(accountId, categoryId, amount, description)
+        if(!newTransaction){
+            setError("Unable to create transaction")
+            return
+        }
+
+        
     }catch(error){
         console.error(error)
     }
@@ -134,7 +150,7 @@ async function handleDeleteAccount(accountId){
                             <input type="number" id="transactionAmount" name="transaction_amount" value={amount} onChange={(e)=>setAmount(Number(e.target.value))}/>
                             <label htmlFor="description">Description:</label>
                             <input type="text" id="description" placeholder="Purchase from Kroger" name="description" value={description} onChange={(e)=>setDescription(e.target.value)}/>
-                            <button type="submit">Add <Transaction></Transaction></button>
+                            <button type="submit"> Add Transaction </button>
                     </form>
                     </section>
                 </main>
