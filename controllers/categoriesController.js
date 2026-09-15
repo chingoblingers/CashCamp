@@ -22,7 +22,7 @@ export async function getUserCatergories(req, res) {
         const userId = req.user.id
         const categories = await getCategories(userId)
         if (categories.length === 0){
-            return res.status(200).json([])
+            return res.status(200).json({categories: []})
         }
         res.status(200).json({categories: categories})
     }catch(error){
