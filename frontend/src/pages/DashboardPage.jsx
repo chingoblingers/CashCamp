@@ -196,7 +196,7 @@ async function handleDeleteTransaction(accountId, transactionId){
                         </div>
                     </section>
                     <div className="dashboardGrid">
-                        <section className="accountsContainer dashboardContainer">
+                        <section className="accountsContainer">
                             {accounts.length === 0 ? (<p>No accounts found</p>): (accounts.map(account =>{
                                 return  <div key={account.id} className="subCard">
                                             <p>{account.account_name}</p>
@@ -220,7 +220,7 @@ async function handleDeleteTransaction(accountId, transactionId){
                         </section>
                     </div>
                     <section className="formContainer">
-                        <form className="createAccountsForm" onSubmit={handleCreateAccount}>
+                        <form className="createAccountsForm dashForm" onSubmit={handleCreateAccount}>
                             <label htmlFor="accountName">Account Name:</label>
                             <input type="text" id="accountName" placeholder="Ken's Card Game Account" name="account_name" value={accountName} onChange={(e)=>setAccountName(e.target.value)} required/>
                             <label htmlFor="accountType">Account Type:</label>
@@ -229,7 +229,7 @@ async function handleDeleteTransaction(accountId, transactionId){
                             <input type="number" id="startingBalance" name="starting_balance" value={startingBalance} onChange={(e)=>setStartingBalance(Number(e.target.value))} required/>
                             <button type="submit">Create Account</button>
                         </form>
-                        <form className="categoryForm" onSubmit={handleCreateCategory}>
+                        <form className="categoryForm dashForm" onSubmit={handleCreateCategory}>
                             <label htmlFor="catName">Category Name:</label>
                             <input type="text" id="catName" placeholder="Fast Food.." name="catName" value={categoryName} onChange={(e)=>setCategoryName(e.target.value)} required/>
                             <label htmlFor="catGroup">Category Group:</label>
@@ -240,7 +240,7 @@ async function handleDeleteTransaction(accountId, transactionId){
                             </select>
                             <button type="submit">Create Category</button>  
                         </form>
-                        <form className="transactionForm" onSubmit={handleCreateTransaction}>
+                        <form className="transactionForm dashForm" onSubmit={handleCreateTransaction}>
                             <select value={accountId} onChange={(e)=>setAccountId(e.target.value)} required>
                                 <option value=""> Choose Account </option>
                                 {accounts.map(account => {

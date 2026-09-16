@@ -49,14 +49,28 @@ h1{
     margin-top: 0;
 }
 
-.dashboardContainer{
+.accountsContainer{
     border: 1px solid black;
     text-align: center;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
 }
 
 .subCard{
     border: 1px solid black;
     padding: 0.5em;
+}
+
+.formContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.dashForm{
+    display: flex;
+    border: 1px solid green;
+    flex-direction: column;
+    padding: 0.5em 1em;
+    gap: 1rem;
 }
