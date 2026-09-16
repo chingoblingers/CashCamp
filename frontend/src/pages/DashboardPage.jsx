@@ -196,12 +196,12 @@ async function handleDeleteTransaction(accountId, transactionId){
                         </div>
                     </section>
                     <div className="dashboardGrid">
-                        <section className="accountsContainer">
+                        <section className="accountsContainer dashboardContainer">
                             {accounts.length === 0 ? (<p>No accounts found</p>): (accounts.map(account =>{
-                                return  <div key={account.id}>
+                                return  <div key={account.id} className="subCard">
                                             <p>{account.account_name}</p>
                                             <p>{account.account_type}</p>
-                                            <p>{account.starting_balance}</p>
+                                            <p>Current Balance: {account.starting_balance}$</p>
                                             <button onClick={()=>handleDeleteAccount(account.id)}>Delete Account</button>
                                         </div>
                             }))}
