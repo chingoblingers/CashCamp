@@ -14,7 +14,7 @@ body{
 
 html, body, #root{
     min-height: 100vh;
-    background-color: #1d1e22;
+    background-color: #c9af98;
 }
 
 .dashboardGrid{
@@ -35,7 +35,7 @@ html, body, #root{
     align-items: center;
     border: 1px solid black;
     border-radius: 0.5rem;
-    background-color: #393f4d;
+    background-color: #ed8a63;
 }
 .summaryCard p{
     margin: 0;
