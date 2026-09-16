@@ -8,6 +8,13 @@ html{
 
 body{
     font-size: 1.6rem;
+    margin: 0;
+    padding: 0 0.5em;
+}
+
+html, body, #root{
+    min-height: 100vh;
+    background-color: #1d1e22;
 }
 
 .dashboardGrid{
@@ -20,4 +27,15 @@ body{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
+}
+
+.summaryCard{
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    text-align: center;
+    background-color: #393f4d;
+}
+
+h1{
+    margin-top: 0;
 }
