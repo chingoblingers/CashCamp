@@ -261,7 +261,7 @@ async function handleDeleteTransaction(accountId, transactionId){
                     </form>
                     </section>
                     <section className="categoriesList">
-                            {categories.map(category => <div key={category.id}> <p>{category.name}</p> <button onClick={()=>handleDeleteCategory(category.id)}>Delete Category</button> </div>)}   
+                            {categories.map(category => <div key={category.id} className="categoryItem"> <p>{category.name}</p> <button onClick={()=>handleDeleteCategory(category.id)}>Delete Category</button> </div>)}   
                     </section>
                 </main>
                 </>
