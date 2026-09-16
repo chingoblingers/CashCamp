@@ -174,13 +174,12 @@ async function handleDeleteTransaction(accountId, transactionId){
             {loading && <p>Loading dashboard...</p>}
             {error && <p>{error}</p>}
             {dashboardData && (
-                <>
-                <header>
-                    <h1> Dashboard Page </h1>
-                    <p> Welcome Back! </p>
-                    <button onClick={logout}> Logout </button>
-                </header>
-                <main>
+                <main className="dashboardPage">
+                    <header>
+                        <h1> Dashboard Page </h1>
+                        <p> Welcome Back! </p>
+                        <button onClick={logout}> Logout </button>
+                    </header>
                     <section className="summaryContainer">
                         <div className="summaryCard">
                             <p className="cardLabel"> Total Income:</p>
@@ -264,7 +263,6 @@ async function handleDeleteTransaction(accountId, transactionId){
                             {categories.map(category => <div key={category.id} className="categoryItem"> <p>{category.name}</p> <button onClick={()=>handleDeleteCategory(category.id)}>Delete Category</button> </div>)}   
                     </section>
                 </main>
-                </>
             )}        
         </>
 
