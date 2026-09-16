@@ -182,9 +182,15 @@ async function handleDeleteTransaction(accountId, transactionId){
                 </header>
                 <main>
                     <section className="summaryContainer">
-                        <p>Total Income: {dashboardData.summary.total_income}</p>
-                        <p>Total Expenses: {dashboardData.summary.total_expenses}</p>
-                        <p>Current Balance: {dashboardData.summary.current_balance}</p>
+                        <div className="summaryCard">
+                            <p>Total Income: {dashboardData.summary.total_income}</p>
+                        </div>
+                        <div className="summaryCard">
+                            <p>Total Expenses: {dashboardData.summary.total_expenses}</p>   
+                        </div>
+                        <div className="summaryCard">
+                            <p>Current Balance: {dashboardData.summary.current_balance}</p>
+                        </div>
                     </section>
                     <div className="dashboardGrid">
                         <section className="accountsContainer">

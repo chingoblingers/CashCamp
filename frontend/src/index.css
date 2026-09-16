@@ -16,7 +16,7 @@ body{
     gap: 1rem;
 }
 
-.summaryCard{
+.summaryContainer{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
