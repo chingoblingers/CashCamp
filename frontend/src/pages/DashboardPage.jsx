@@ -186,28 +186,30 @@ async function handleDeleteTransaction(accountId, transactionId){
                         <p>Total Expenses: {dashboardData.summary.total_expenses}</p>
                         <p>Current Balance: {dashboardData.summary.current_balance}</p>
                     </section>
-                    <section className="transactionContainer">
-                        {dashboardData.recent_transactions.length === 0 ? (<p>No recent transactions</p>): (
-                            <div>
-                                {dashboardData.recent_transactions.map(transaction =>{
-                                  return <div key={transaction.transaction_id}>
-                                            <p>{transaction.description|| 'No description'} - {transaction.amount}</p>
-                                            <button onClick={()=>handleDeleteTransaction(transaction.account_id, transaction.transaction_id)}> Delete Transaction </button>
-                                         </div>
-                                })}
-                            </div>
-                        ) }
-                    </section>
-                    <section className="accountsContainer">
-                        {accounts.length === 0 ? (<p>No accounts found</p>): (accounts.map(account =>{
-                            return  <div key={account.id}>
-                                        <p>{account.account_name}</p>
-                                        <p>{account.account_type}</p>
-                                        <p>{account.starting_balance}</p>
-                                        <button onClick={()=>handleDeleteAccount(account.id)}>Delete Account</button>
-                                    </div>
-                        }))}
-                    </section>
+                    <div className="dashboardGrid">
+                        <section className="accountsContainer">
+                            {accounts.length === 0 ? (<p>No accounts found</p>): (accounts.map(account =>{
+                                return  <div key={account.id}>
+                                            <p>{account.account_name}</p>
+                                            <p>{account.account_type}</p>
+                                            <p>{account.starting_balance}</p>
+                                            <button onClick={()=>handleDeleteAccount(account.id)}>Delete Account</button>
+                                        </div>
+                            }))}
+                        </section>    
+                        <section className="transactionContainer">
+                            {dashboardData.recent_transactions.length === 0 ? (<p>No recent transactions</p>): (
+                                <div>
+                                    {dashboardData.recent_transactions.map(transaction =>{
+                                    return <div key={transaction.transaction_id}>
+                                                <p>{transaction.description|| 'No description'} - {transaction.amount}</p>
+                                                <button onClick={()=>handleDeleteTransaction(transaction.account_id, transaction.transaction_id)}> Delete Transaction </button>
+                                            </div>
+                                    })}
+                                </div>
+                            ) }
+                        </section>
+                    </div>
                     <section className="formContainer">
                         <form className="createAccountsForm" onSubmit={handleCreateAccount}>
                             <label htmlFor="accountName">Account Name:</label>
