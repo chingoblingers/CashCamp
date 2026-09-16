@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 
 export default function HomePage(){
     return(
-        <>
+        <div className="homePage">
             <h1>Welcome to the Home page</h1>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
-        </>
+        </div>
     )
 }
