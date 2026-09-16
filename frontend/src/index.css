@@ -2,12 +2,20 @@
     box-sizing: border-box;
 }
 
-.homePage{
-    background-image: url('../src/assets/plant2.jpg');
+.homePage, .loginPage, .signupPage{
     background-size: cover;
     background-position: center;
     min-height: 100vh;
     padding: 1em;
+}
+.homePage{
+background-image: url('../src/assets/plant2.jpg');
+}
+.loginPage{
+background-image: url('../src/assets/plant3.jpg');
+}
+.signupPage{
+background-image: url('../src/assets/plant1.jpg');    
 }
 
 html{

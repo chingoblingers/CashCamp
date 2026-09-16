@@ -21,7 +21,7 @@ export default function SignupPage(){
     }
 
     return (
-        <>
+        <div className='signupPage'>
         <h1> Sign up here to create your account! </h1>
         <Link to="/login"> click here to login if you have an account already! </Link>
         <form onSubmit={handleSubmit}>
@@ -34,6 +34,6 @@ export default function SignupPage(){
         <button type="submit"> Submit </button>
         {error && <p>{error}</p>}
         </form>    
-        </>
+        </div>
     )
 }

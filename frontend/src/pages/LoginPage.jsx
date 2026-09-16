@@ -33,10 +33,11 @@ export default function LoginPage(){
     
     return (
         <>
-        <header>
-            <h1>Welcome to CashCamp, the world's best finance tracker!</h1>
-        </header>
-        <main>
+
+        <main className='loginPage'>
+            <header>
+                <h1>Welcome to CashCamp, the world's best finance tracker!</h1>
+            </header>
             <Link to="/signup">Click here if you don't have an account!</Link>
             <form onSubmit={handleSubmit}>
                 <label htmlFor='loginEmail'>Email:</label>
