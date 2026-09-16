@@ -6,16 +6,38 @@
     background-size: cover;
     background-position: center;
     min-height: 100vh;
-    padding: 1em;
 }
 .homePage{
 background-image: url('../src/assets/plant2.jpg');
+display: flex;
+align-items: center;
+justify-content: center;
 }
 .loginPage{
 background-image: url('../src/assets/plant3.jpg');
 }
 .signupPage{
 background-image: url('../src/assets/plant1.jpg');    
+}
+
+.homeContent{
+display: flex;
+flex-direction: column;
+font-size: 3rem;
+transform: translate(-25rem, -8rem);
+}
+
+.homeButtons{
+    display: flex;
+    gap: 1rem;
+}
+
+.homeBtn{
+    border: 1px solid black;
+    text-decoration: none;
+    padding: 0.3em 0.6em;
+    border-radius: 1rem;
+    background-color: #3a4660;
 }
 
 html{
