@@ -6,18 +6,19 @@
     background-size: cover;
     background-position: center;
     min-height: 100vh;
+    display: flex;
+}
+.loginPage, .signupPage{
+flex-direction: column;
+align-items: end;
 }
 .homePage{
 background-image: url('../src/assets/plant2.jpg');
-display: flex;
 align-items: center;
 justify-content: center;
 }
 .loginPage{
 background-image: url('../src/assets/plant3.jpg');
-display: flex;
-flex-direction: column;
-align-items: end;
 }
 .signupPage{
 background-image: url('../src/assets/plant1.jpg');    
