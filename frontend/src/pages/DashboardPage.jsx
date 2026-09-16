@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import { useAuth } from "../context/AuthContext.jsx"
 import { createAccount, getAccounts, deleteAccount } from "../api/accountsApi.js"
 import { getCategories } from '../api/categoriesApi.js'
-import { createTransaction } from "../api/transactionsApi.js"
+import { createTransaction, deleteTransaction } from "../api/transactionsApi.js"
 import { createCategory, deleteCategory } from "../api/categoriesApi.js"
 
 export default function DashboardPage(){
@@ -154,6 +154,21 @@ async function handleDeleteCategory(categoryId){
     }
 }
 
+async function handleDeleteTransaction(accountId, transactionId){
+    try {
+        await deleteTransaction(accountId, transactionId)
+        const updatedDashboard = await getDashboardSummary()
+        setDashboardData(updatedDashboard)
+    } catch (error) {
+    if (error.message === "Unauthorized") {
+    logout()
+    return
+    }
+    console.error(error)
+    setError(error.message) 
+    }
+    }
+
     return (
         <>
             {loading && <p>Loading dashboard...</p>}
@@ -173,11 +188,14 @@ async function handleDeleteCategory(categoryId){
                     </section>
                     <section className="transactionContainer">
                         {dashboardData.recent_transactions.length === 0 ? (<p>No recent transactions</p>): (
-                            <ul>
+                            <div>
                                 {dashboardData.recent_transactions.map(transaction =>{
-                                  return <li key={transaction.transaction_id}>{transaction.description|| 'No description'} - {transaction.amount}</li>
+                                  return <div key={transaction.transaction_id}>
+                                            <p>{transaction.description|| 'No description'} - {transaction.amount}</p>
+                                            <button onClick={()=>handleDeleteTransaction(transaction.account_id, transaction.transaction_id)}> Delete Transaction </button>
+                                         </div>
                                 })}
-                            </ul>
+                            </div>
                         ) }
                     </section>
                     <section className="accountsContainer">
