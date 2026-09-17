@@ -80,6 +80,8 @@ async function handleDeleteAccount(accountId){
         setAccounts(prevAccount => {
           return prevAccount.filter(account=> account.id !== accountId)
         })
+        const updatedDashboard = await getDashboardSummary()
+        setDashboardData(updatedDashboard)
     }catch(error){
     if (error.message === "Unauthorized") {
     logout()
