@@ -218,7 +218,8 @@ async function handleDeleteTransaction(accountId, transactionId){
                                     <div className="transactionBox">
                                         {dashboardData.recent_transactions.map(transaction =>{
                                         return <div key={transaction.transaction_id} className="transaction">
-                                                    <p>{transaction.description|| 'No description'} - {currencyFormatter.format(Number(transaction.amount))}</p>
+                                                    <p>{currencyFormatter.format(Number(transaction.amount))}</p>
+                                                    <p>{transaction.description|| 'No description'}</p>
                                                     <button onClick={()=>handleDeleteTransaction(transaction.account_id, transaction.transaction_id)}> Delete Transaction </button>
                                                 </div>
                                         })}

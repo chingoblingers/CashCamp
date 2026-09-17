@@ -136,11 +136,21 @@ h1{
     gap: 0.8rem;
 }
 
-.subCard{
+.subCard, .transaction{
     border: 1px solid black;
     border-radius: 1.2rem;
     padding: 0.5em;
     background-color: #49494b;
+}
+
+.transaction{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+.transaction p {
+    margin: 0;
 }
 
 .formContainer{
@@ -165,7 +175,7 @@ h1{
     gap: 0.4rem;
 }
 
-.categoryItem, .transaction{
+.categoryItem{
     display: flex;
     border-radius: 0.5rem;
     padding: 0.3em;
@@ -174,7 +184,7 @@ h1{
     align-items: center;
 }
 
-.categoryItem button, .transaction button {
+.categoryItem button{
     border: none;
     border-radius: 2rem;
     padding: 1em 1.5em;
@@ -200,6 +210,6 @@ header{
     align-items: center;
 }
 
-header button{
+header button, .transaction button, .subCard button{
     padding: 0.5em 1em;
 }
