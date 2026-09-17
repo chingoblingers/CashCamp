@@ -126,7 +126,7 @@ html, body, #root{
 }
 
 h1{
-    margin-top: 0;
+    margin: 0;
 }
 
 .accountsContainer{
@@ -192,4 +192,14 @@ background-color: #8e8e90;
 h2{
     margin-top: 0;
     text-align: center;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header button{
+    padding: 0.5em 1em;
 }
