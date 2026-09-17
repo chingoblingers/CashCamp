@@ -213,3 +213,27 @@ header{
 header button, .transaction button, .subCard button{
     padding: 0.5em 1em;
 }
+
+.transaction button, .subCard button{
+    background-color: maroon;
+    border: none;
+    border-radius: 1rem;
+}
+
+.transaction button:hover, .subCard button:hover{
+    background-color: red;
+    border: none;
+    border-radius: 1rem;
+}
+
+.dashForm button{
+    margin-top: 1em;
+    background-color: #3d7c47;
+    border: none;
+    border-radius: 1rem;
+    padding: 1em;
+}
+
+.dashForm button:hover{
+    background-color: lightgreen;
+}
