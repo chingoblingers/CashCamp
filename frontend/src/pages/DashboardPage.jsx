@@ -195,72 +195,84 @@ async function handleDeleteTransaction(accountId, transactionId){
                         </div>
                     </section>
                     <div className="dashboardGrid">
-                        <section className="accountsContainer">
-                            {accounts.length === 0 ? (<p>No accounts found</p>): (accounts.map(account =>{
-                                return  <div key={account.id} className="subCard">
-                                            <p>{account.account_name}</p>
-                                            <p>{account.account_type}</p>
-                                            <p>Current Balance: {account.starting_balance}$</p>
-                                            <button onClick={()=>handleDeleteAccount(account.id)}>Delete Account</button>
-                                        </div>
-                            }))}
-                        </section>    
-                        <section className="transactionContainer">
-                            {dashboardData.recent_transactions.length === 0 ? (<p>No recent transactions</p>): (
-                                <div>
-                                    {dashboardData.recent_transactions.map(transaction =>{
-                                    return <div key={transaction.transaction_id}>
-                                                <p>{transaction.description|| 'No description'} - {transaction.amount}</p>
-                                                <button onClick={()=>handleDeleteTransaction(transaction.account_id, transaction.transaction_id)}> Delete Transaction </button>
+                        <section className="accountsSection">
+                            <h2>Accounts</h2>
+                            <section className="accountsContainer">
+                                {accounts.length === 0 ? (<p>No accounts found</p>): (accounts.map(account =>{
+                                    return  <div key={account.id} className="subCard">
+                                                <p>{account.account_name}</p>
+                                                <p>{account.account_type}</p>
+                                                <p>Current Balance: {account.starting_balance}$</p>
+                                                <button onClick={()=>handleDeleteAccount(account.id)}>Delete Account</button>
                                             </div>
-                                    })}
-                                </div>
-                            ) }
+                                }))}
+                            </section>
+                        </section>
+                        <section className="transactionSection">
+                            <h2> Recent Transactions</h2>
+                            <section className="transactionContainer">
+                                {dashboardData.recent_transactions.length === 0 ? (<p>No recent transactions</p>): (
+                                    <div>
+                                        {dashboardData.recent_transactions.map(transaction =>{
+                                        return <div key={transaction.transaction_id}>
+                                                    <p>{transaction.description|| 'No description'} - {transaction.amount}</p>
+                                                    <button onClick={()=>handleDeleteTransaction(transaction.account_id, transaction.transaction_id)}> Delete Transaction </button>
+                                                </div>
+                                        })}
+                                    </div>
+                                ) }
+                            </section>
                         </section>
                     </div>
-                    <section className="formContainer">
-                        <form className="createAccountsForm dashForm" onSubmit={handleCreateAccount}>
-                            <label htmlFor="accountName">Account Name:</label>
-                            <input type="text" id="accountName" placeholder="Ken's Card Game Account" name="account_name" value={accountName} onChange={(e)=>setAccountName(e.target.value)} required/>
-                            <label htmlFor="accountType">Account Type:</label>
-                            <input type="text" id="accountType" placeholder="Checking" name="account_type" value={accountType} onChange={(e)=>setAccountType(e.target.value)} required/>
-                            <label htmlFor="startingBalance">Starting Balance:</label>
-                            <input type="number" id="startingBalance" name="starting_balance" value={startingBalance} onChange={(e)=>setStartingBalance(Number(e.target.value))} required/>
-                            <button type="submit">Create Account</button>
+                    <section className="formSection">
+                        <h2> Manage Finanaces </h2>
+                        <section className="formContainer">
+                            <form className="createAccountsForm dashForm" onSubmit={handleCreateAccount}>
+                                <label htmlFor="accountName">Account Name:</label>
+                                <input type="text" id="accountName" placeholder="Ken's Card Game Account" name="account_name" value={accountName} onChange={(e)=>setAccountName(e.target.value)} required/>
+                                <label htmlFor="accountType">Account Type:</label>
+                                <input type="text" id="accountType" placeholder="Checking" name="account_type" value={accountType} onChange={(e)=>setAccountType(e.target.value)} required/>
+                                <label htmlFor="startingBalance">Starting Balance:</label>
+                                <input type="number" id="startingBalance" name="starting_balance" value={startingBalance} onChange={(e)=>setStartingBalance(Number(e.target.value))} required/>
+                                <button type="submit">Create Account</button>
+                            </form>
+                            <form className="categoryForm dashForm" onSubmit={handleCreateCategory}>
+                                <label htmlFor="catName">Category Name:</label>
+                                <input type="text" id="catName" placeholder="Fast Food.." name="catName" value={categoryName} onChange={(e)=>setCategoryName(e.target.value)} required/>
+                                <label htmlFor="catGroup">Category Group:</label>
+                                <input type="text" id="catGroup" placeholder="Expenses.." name="catGroup" value={categoryGroup} onChange={(e)=>setCategoryGroup(e.target.value)} required/>
+                                <select value={categoryKind} onChange={(e)=>setCategoryKind(e.target.value)}>
+                                    <option value="expense">Expense</option>
+                                    <option value="income">Income</option>
+                                </select>
+                                <button type="submit">Create Category</button>  
+                            </form>
+                            <form className="transactionForm dashForm" onSubmit={handleCreateTransaction}>
+                                <select value={accountId} onChange={(e)=>setAccountId(e.target.value)} required>
+                                    <option value=""> Choose Account </option>
+                                    {accounts.map(account => {
+                                        return <option key={account.id} value={account.id}>{account.account_name}</option>
+                                    })}
+                                </select>
+                                <select value={categoryId} onChange={(e)=>setCategoryId(e.target.value)}required>
+                                    <option value="">Choose Category</option>
+                                    {categories.map(category =>{
+                                        return <option key={category.id} value={category.id}>{category.name}</option>
+                                    })}
+                                </select>
+                                <label htmlFor="transactionAmount">Transaction Amount:</label>
+                                <input type="number" id="transactionAmount" name="transaction_amount" value={amount} onChange={(e)=>setAmount(Number(e.target.value))} required/>
+                                <label htmlFor="description">Description:</label>
+                                <input type="text" id="description" placeholder="Purchase from Kroger" name="description" value={description} onChange={(e)=>setDescription(e.target.value)}/>
+                                <button type="submit"> Add Transaction </button>
                         </form>
-                        <form className="categoryForm dashForm" onSubmit={handleCreateCategory}>
-                            <label htmlFor="catName">Category Name:</label>
-                            <input type="text" id="catName" placeholder="Fast Food.." name="catName" value={categoryName} onChange={(e)=>setCategoryName(e.target.value)} required/>
-                            <label htmlFor="catGroup">Category Group:</label>
-                            <input type="text" id="catGroup" placeholder="Expenses.." name="catGroup" value={categoryGroup} onChange={(e)=>setCategoryGroup(e.target.value)} required/>
-                            <select value={categoryKind} onChange={(e)=>setCategoryKind(e.target.value)}>
-                                <option value="expense">Expense</option>
-                                <option value="income">Income</option>
-                            </select>
-                            <button type="submit">Create Category</button>  
-                        </form>
-                        <form className="transactionForm dashForm" onSubmit={handleCreateTransaction}>
-                            <select value={accountId} onChange={(e)=>setAccountId(e.target.value)} required>
-                                <option value=""> Choose Account </option>
-                                {accounts.map(account => {
-                                    return <option key={account.id} value={account.id}>{account.account_name}</option>
-                                })}
-                            </select>
-                            <select value={categoryId} onChange={(e)=>setCategoryId(e.target.value)}required>
-                                <option value="">Choose Category</option>
-                                {categories.map(category =>{
-                                    return <option key={category.id} value={category.id}>{category.name}</option>
-                                })}
-                            </select>
-                            <label htmlFor="transactionAmount">Transaction Amount:</label>
-                            <input type="number" id="transactionAmount" name="transaction_amount" value={amount} onChange={(e)=>setAmount(Number(e.target.value))} required/>
-                            <label htmlFor="description">Description:</label>
-                            <input type="text" id="description" placeholder="Purchase from Kroger" name="description" value={description} onChange={(e)=>setDescription(e.target.value)}/>
-                            <button type="submit"> Add Transaction </button>
-                    </form>
+                        </section>
                     </section>
-                    <section className="categoriesList">
-                            {categories.map(category => <div key={category.id} className="categoryItem"> <p>{category.name}</p> <button onClick={()=>handleDeleteCategory(category.id)}>Delete Category</button> </div>)}   
+                    <section className="categoriesSection">
+                        <h2>Categories</h2>
+                        <section className="categoriesList">
+                                {categories.map(category => <div key={category.id} className="categoryItem"> <p>{category.name}</p> <button onClick={()=>handleDeleteCategory(category.id)}>Delete Category</button> </div>)}   
+                        </section>
                     </section>
                 </main>
             )}        
