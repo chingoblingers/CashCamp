@@ -1,8 +1,8 @@
-
+const apiBaseUrl = import.meta.env.VITE_API_URL
 
 export async function getDashboardSummary(){
     const token = localStorage.getItem('token')
-    const response = await fetch(`http://localhost:8000/me/summary`, {method: 'GET', headers:{Authorization: `Bearer ${token}`}})
+    const response = await fetch(`${apiBaseUrl}/me/summary`, {method: 'GET', headers:{Authorization: `Bearer ${token}`}})
     if (response.status === 401){
         throw new Error('Unauthorized')
     }
