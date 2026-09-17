@@ -23,6 +23,10 @@ export default function DashboardPage(){
     const [categoryName, setCategoryName] = useState("")
     const [categoryKind, setCategoryKind] = useState('expense')
     const [categoryGroup, setCategoryGroup] = useState('')
+    const currencyFormatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+})
 
 
     useEffect(()=>{
@@ -190,7 +194,7 @@ async function handleDeleteTransaction(accountId, transactionId){
                         </div>
                         <div className="summaryCard">
                             <p className="cardLabel"> Current Balance:</p>
-                            <p className="cardValue">{dashboardData.summary.current_balance}$</p>
+                            <p className="cardValue">{currencyFormatter.format(Number(dashboardData.summary.current_balance))}$</p>
                         </div>
                     </section>
                     <div className="dashboardGrid">
