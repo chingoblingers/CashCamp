@@ -11,8 +11,9 @@ import cors from 'cors'
 
 const app = express()
 const PORT = process.env.PORT || 8000
+const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173"
 
-app.use(cors({origin: "http://localhost:5173"}))
+app.use(cors({origin: CLIENT_URL}))
 app.use(express.json())
 app.use("/test", TestRouter)
 app.use("/users", UsersRouter)
