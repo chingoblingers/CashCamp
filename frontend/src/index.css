@@ -88,7 +88,7 @@ body{
 
 html, body, #root{
     min-height: 100vh;
-    background-color: #c9af98;
+    background-color: #f7f7f7;
 }
 .dashboardPage{
     padding: 1em;
@@ -115,7 +115,7 @@ html, body, #root{
     align-items: center;
     border: 1px solid black;
     border-radius: 0.5rem;
-    background-color: #ed8a63;
+    background-color: #3d7c47;
 }
 .summaryCard p{
     margin: 0;
@@ -130,15 +130,17 @@ h1{
 }
 
 .accountsContainer{
-    border: 1px solid black;
     text-align: center;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: 0.8rem;
 }
 
 .subCard{
     border: 1px solid black;
+    border-radius: 1.2rem;
     padding: 0.5em;
+    background-color: #49494b;
 }
 
 .formContainer{
@@ -149,7 +151,8 @@ h1{
 
 .dashForm{
     display: flex;
-    border: 1px solid green;
+    background-color: #49494b;
+    border-radius: 1.1rem;
     flex-direction: column;
     padding: 0.5em 1em;
     gap: 1rem;
@@ -169,5 +172,19 @@ h1{
     border-radius: 0.5rem;
     padding: 0.3em;
     font-size: 1.3rem;
-    background-color: #ed8a63;
+    background-color: #3d7c47;
+}
+
+.formSection,
+.categoriesSection,
+.accountsSection,
+.transactionSection {
+border-radius: 1rem;    
+padding: 1em;
+background-color: #8e8e90;
+}
+
+h2{
+    margin-top: 0;
+    text-align: center;
 }
