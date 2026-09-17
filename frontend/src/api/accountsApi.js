@@ -1,6 +1,9 @@
+const apiBaseUrl = import.meta.env.VITE_API_URL
+
+
 export async function getAccounts(){
     const token = localStorage.getItem('token')
-    const response = await fetch(`http://localhost:8000/me/accounts`, {method: 'GET', headers:{Authorization: `Bearer ${token}`}})
+    const response = await fetch(`${apiBaseUrl}/me/accounts`, {method: 'GET', headers:{Authorization: `Bearer ${token}`}})
     if (response.status === 401){
         throw new Error('Unauthorized')
     }
@@ -14,7 +17,7 @@ export async function getAccounts(){
 
 export async function createAccount(account_name, account_type, starting_balance){
     const token = localStorage.getItem('token')
-    const response = await fetch(`http://localhost:8000/me/accounts`, 
+    const response = await fetch(`${apiBaseUrl}/me/accounts`, 
         {method: 'POST', headers:{Authorization: `Bearer ${token}`, 'Content-Type': 'application/json'}, body: JSON.stringify({
             account_name, account_type, starting_balance
             })})
@@ -30,7 +33,7 @@ export async function createAccount(account_name, account_type, starting_balance
 
 export async function deleteAccount(account_id){
     const token = localStorage.getItem('token')
-    const response = await fetch(`http://localhost:8000/me/accounts/${account_id}`,{method: 'DELETE', headers:{Authorization: `Bearer ${token}`, 'Content-Type': 'application/json'}})
+    const response = await fetch(`${apiBaseUrl}/me/accounts/${account_id}`,{method: 'DELETE', headers:{Authorization: `Bearer ${token}`, 'Content-Type': 'application/json'}})
     if (response.status === 401){
         throw new Error('Unauthorized')
     }
