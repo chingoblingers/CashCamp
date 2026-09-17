@@ -167,12 +167,17 @@ h1{
 
 .categoryItem{
     display: flex;
-    gap: 0.5rem;
-    border: 1px solid black;
     border-radius: 0.5rem;
     padding: 0.3em;
     font-size: 1.3rem;
-    background-color: #3d7c47;
+    flex-direction: column;
+    align-items: center;
+}
+
+.categoryItem button {
+    border: none;
+    border-radius: 2rem;
+    padding: 1em 1.5em;
 }
 
 .formSection,
