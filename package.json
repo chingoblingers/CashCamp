@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon server.js",
-    "schema": "node db/runSchema.js"
+    "schema": "node db/runSchema.js",
+    "start": "node server.js"
   },
   "repository": {
     "url": "git+https://github.com/chingoblingers/CashCamp.git"
