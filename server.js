@@ -10,7 +10,7 @@ import { requireAuth } from "./middleware/requireAuth.js"
 import cors from 'cors'
 
 const app = express()
-const PORT = 8000
+const PORT = process.env.PORT || 8000
 
 app.use(cors({origin: "http://localhost:5173"}))
 app.use(express.json())
