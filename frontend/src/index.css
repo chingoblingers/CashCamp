@@ -158,14 +158,14 @@ h1{
     gap: 1rem;
 }
 
-.categoriesList{
+.categoriesList, .transactionBox{
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 0.4rem;
 }
 
-.categoryItem{
+.categoryItem, .transaction{
     display: flex;
     border-radius: 0.5rem;
     padding: 0.3em;
@@ -174,7 +174,7 @@ h1{
     align-items: center;
 }
 
-.categoryItem button {
+.categoryItem button, .transaction button {
     border: none;
     border-radius: 2rem;
     padding: 1em 1.5em;

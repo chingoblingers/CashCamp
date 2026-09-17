@@ -176,8 +176,7 @@ async function handleDeleteTransaction(accountId, transactionId){
             {dashboardData && (
                 <main className="dashboardPage">
                     <header>
-                        <h1> Dashboard Page </h1>
-                        <p> Welcome Back! </p>
+                        <h1> Welcome Back! </h1>
                         <button onClick={logout}> Logout </button>
                     </header>
                     <section className="summaryContainer">
@@ -212,9 +211,9 @@ async function handleDeleteTransaction(accountId, transactionId){
                             <h2> Recent Transactions</h2>
                             <section className="transactionContainer">
                                 {dashboardData.recent_transactions.length === 0 ? (<p>No recent transactions</p>): (
-                                    <div>
+                                    <div className="transactionBox">
                                         {dashboardData.recent_transactions.map(transaction =>{
-                                        return <div key={transaction.transaction_id}>
+                                        return <div key={transaction.transaction_id} className="transaction">
                                                     <p>{transaction.description|| 'No description'} - {transaction.amount}</p>
                                                     <button onClick={()=>handleDeleteTransaction(transaction.account_id, transaction.transaction_id)}> Delete Transaction </button>
                                                 </div>
