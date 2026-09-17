@@ -186,15 +186,15 @@ async function handleDeleteTransaction(accountId, transactionId){
                     <section className="summaryContainer">
                         <div className="summaryCard">
                             <p className="cardLabel"> Total Income:</p>
-                            <p className="cardValue">{dashboardData.summary.total_income}$</p>
+                            <p className="cardValue">{currencyFormatter.format(Number(dashboardData.summary.total_income))}</p>
                         </div>
                         <div className="summaryCard">
                             <p className="cardLabel"> Total Expenses:</p>
-                            <p className="cardValue">{dashboardData.summary.total_expenses}$</p>   
+                            <p className="cardValue">{currencyFormatter.format(Number(dashboardData.summary.total_expenses))}</p>   
                         </div>
                         <div className="summaryCard">
                             <p className="cardLabel"> Current Balance:</p>
-                            <p className="cardValue">{currencyFormatter.format(Number(dashboardData.summary.current_balance))}$</p>
+                            <p className="cardValue">{currencyFormatter.format(Number(dashboardData.summary.current_balance))}</p>
                         </div>
                     </section>
                     <div className="dashboardGrid">
@@ -205,7 +205,7 @@ async function handleDeleteTransaction(accountId, transactionId){
                                     return  <div key={account.id} className="subCard">
                                                 <p>{account.account_name}</p>
                                                 <p>{account.account_type}</p>
-                                                <p>Current Balance: {account.starting_balance}$</p>
+                                                <p>Current Balance: {currencyFormatter.format(Number(account.starting_balance))}</p>
                                                 <button onClick={()=>handleDeleteAccount(account.id)}>Delete Account</button>
                                             </div>
                                 }))}
@@ -218,7 +218,7 @@ async function handleDeleteTransaction(accountId, transactionId){
                                     <div className="transactionBox">
                                         {dashboardData.recent_transactions.map(transaction =>{
                                         return <div key={transaction.transaction_id} className="transaction">
-                                                    <p>{transaction.description|| 'No description'} - {transaction.amount}</p>
+                                                    <p>{transaction.description|| 'No description'} - {currencyFormatter.format(Number(transaction.amount))}</p>
                                                     <button onClick={()=>handleDeleteTransaction(transaction.account_id, transaction.transaction_id)}> Delete Transaction </button>
                                                 </div>
                                         })}
